@@ -15,20 +15,23 @@ def shorten_link(headers, url):
                              json=body)
     return response.json()['id']
 
+
 def count_clicks(headers, short_link):
     url_sum = f"https://api-ssl.bitly.com/v4/bitlinks/{short_link}/clicks/summary"
     response = requests.get(url_sum,headers=headers)
     return response.json()['total_clicks']
+
 
 def is_bitlink(headers, bitlink):
     bitl = f"https://api-ssl.bitly.com/v4/bitlinks/{bitlink}"
     response = requests.get(bitl,headers=headers)
     return response.ok
 
+
 def main():
-    APIKEY_BITLY = os.getenv('APIKEY_BITLY')
+    apikey_bitly = os.getenv('APIKEY_BITLY')
     headers = {
-    "Authorization": f"Bearer {APIKEY_BITLY}",
+    "Authorization": f"Bearer {apikey_bitly}",
     }
     parser = argparse.ArgumentParser(
         description='Сокращает ссылки и выводит количество переходов по ней'
