@@ -13,15 +13,18 @@ def shorten_link_url(headers, url):
     response = requests.post("https://api-ssl.bitly.com/v4/shorten/", headers=headers, json=body)
     return response.json()['id']
 
+
 def count_clicks(headers, short_link):
     url_sum = f"https://api-ssl.bitly.com/v4/bitlinks/{short_link}/clicks/summary"
     response = requests.get(url_sum, headers=headers)
     return response.json()['total_clicks']
 
+
 def is_bitlink(headers, bitlink):
     bitl = f"https://api-ssl.bitly.com/v4/bitlinks/{bitlink}"
     response = requests.get(bitl, headers=headers)
     return response.ok
+
 
 def main():
     load_dotenv()
@@ -42,7 +45,8 @@ def main():
         else:
             print(shorten_link_url(headers, args.link))
     except requests.exceptions.HTTPError as error:
-        print("неверная ссылка.", error)
+        print("Неверная ссылка.", error)
+
 
 if __name__ == "__main__":
     main()
