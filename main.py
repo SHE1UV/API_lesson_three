@@ -24,6 +24,7 @@ def is_bitlink(headers, bitlink):
     return response.ok
 
 def main():
+    load_dotenv()
     apikey_bitly = os.getenv('APIKEY_BITLY')
     headers = {
         "Authorization": f"Bearer {apikey_bitly}",
